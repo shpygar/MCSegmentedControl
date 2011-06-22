@@ -1,0 +1,309 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		954F4D63138EE48A009E0CDB /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 954F4D61138EE48A009E0CDB /* star.png */; };
+		95BB3BA213084E3D0058E517 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BB3BA113084E3D0058E517 /* UIKit.framework */; };
+		95BB3BA413084E3D0058E517 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BB3BA313084E3D0058E517 /* Foundation.framework */; };
+		95BB3BA613084E3D0058E517 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BB3BA513084E3D0058E517 /* CoreGraphics.framework */; };
+		95BB3BAC13084E3D0058E517 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95BB3BAA13084E3D0058E517 /* InfoPlist.strings */; };
+		95BB3BAF13084E3D0058E517 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BB3BAE13084E3D0058E517 /* main.m */; };
+		95BB3BB213084E3D0058E517 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BB3BB113084E3D0058E517 /* AppController.m */; };
+		95BB3BB513084E3D0058E517 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BB3BB313084E3D0058E517 /* MainWindow.xib */; };
+		95BB3BB813084E3D0058E517 /* MCSegmentedControlDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BB3BB713084E3D0058E517 /* MCSegmentedControlDemoViewController.m */; };
+		95BB3BBB13084E3D0058E517 /* MCSegmentedControlDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BB3BB913084E3D0058E517 /* MCSegmentedControlDemoViewController.xib */; };
+		95BB3BC313084E550058E517 /* MCSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BB3BC213084E550058E517 /* MCSegmentedControl.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		954F4D61138EE48A009E0CDB /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		954F4D62138EE48A009E0CDB /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
+		95BB3B9D13084E3D0058E517 /* MCSegmentedControlDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MCSegmentedControlDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		95BB3BA113084E3D0058E517 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		95BB3BA313084E3D0058E517 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		95BB3BA513084E3D0058E517 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		95BB3BA913084E3D0058E517 /* MCSegmentedControlDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MCSegmentedControlDemo-Info.plist"; sourceTree = "<group>"; };
+		95BB3BAB13084E3D0058E517 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		95BB3BAD13084E3D0058E517 /* MCSegmentedControlDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCSegmentedControlDemo-Prefix.pch"; sourceTree = "<group>"; };
+		95BB3BAE13084E3D0058E517 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		95BB3BB013084E3D0058E517 /* AppController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		95BB3BB113084E3D0058E517 /* AppController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		95BB3BB413084E3D0058E517 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		95BB3BB613084E3D0058E517 /* MCSegmentedControlDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCSegmentedControlDemoViewController.h; sourceTree = "<group>"; };
+		95BB3BB713084E3D0058E517 /* MCSegmentedControlDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCSegmentedControlDemoViewController.m; sourceTree = "<group>"; };
+		95BB3BBA13084E3D0058E517 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MCSegmentedControlDemoViewController.xib; sourceTree = "<group>"; };
+		95BB3BC113084E550058E517 /* MCSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSegmentedControl.h; sourceTree = "<group>"; };
+		95BB3BC213084E550058E517 /* MCSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSegmentedControl.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		95BB3B9A13084E3D0058E517 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95BB3BA213084E3D0058E517 /* UIKit.framework in Frameworks */,
+				95BB3BA413084E3D0058E517 /* Foundation.framework in Frameworks */,
+				95BB3BA613084E3D0058E517 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		954F4D60138EE2F0009E0CDB /* MCSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				95BB3BC113084E550058E517 /* MCSegmentedControl.h */,
+				95BB3BC213084E550058E517 /* MCSegmentedControl.m */,
+			);
+			name = MCSegmentedControl;
+			path = MCSegmentedControlDemo/MCSegmentedControl;
+			sourceTree = "<group>";
+		};
+		95BB3B9213084E3D0058E517 = {
+			isa = PBXGroup;
+			children = (
+				954F4D60138EE2F0009E0CDB /* MCSegmentedControl */,
+				95BB3BA713084E3D0058E517 /* MCSegmentedControlDemo */,
+				95BB3BA013084E3D0058E517 /* Frameworks */,
+				95BB3B9E13084E3D0058E517 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		95BB3B9E13084E3D0058E517 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95BB3B9D13084E3D0058E517 /* MCSegmentedControlDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		95BB3BA013084E3D0058E517 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95BB3BA113084E3D0058E517 /* UIKit.framework */,
+				95BB3BA313084E3D0058E517 /* Foundation.framework */,
+				95BB3BA513084E3D0058E517 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		95BB3BA713084E3D0058E517 /* MCSegmentedControlDemo */ = {
+			isa = PBXGroup;
+			children = (
+				95BB3BB013084E3D0058E517 /* AppController.h */,
+				95BB3BB113084E3D0058E517 /* AppController.m */,
+				95BB3BB313084E3D0058E517 /* MainWindow.xib */,
+				95BB3BB613084E3D0058E517 /* MCSegmentedControlDemoViewController.h */,
+				95BB3BB713084E3D0058E517 /* MCSegmentedControlDemoViewController.m */,
+				95BB3BB913084E3D0058E517 /* MCSegmentedControlDemoViewController.xib */,
+				95BB3BA813084E3D0058E517 /* Supporting Files */,
+			);
+			path = MCSegmentedControlDemo;
+			sourceTree = "<group>";
+		};
+		95BB3BA813084E3D0058E517 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				954F4D61138EE48A009E0CDB /* star.png */,
+				954F4D62138EE48A009E0CDB /* star@2x.png */,
+				95BB3BA913084E3D0058E517 /* MCSegmentedControlDemo-Info.plist */,
+				95BB3BAA13084E3D0058E517 /* InfoPlist.strings */,
+				95BB3BAD13084E3D0058E517 /* MCSegmentedControlDemo-Prefix.pch */,
+				95BB3BAE13084E3D0058E517 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		95BB3B9C13084E3D0058E517 /* MCSegmentedControlDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95BB3BBE13084E3D0058E517 /* Build configuration list for PBXNativeTarget "MCSegmentedControlDemo" */;
+			buildPhases = (
+				95BB3B9913084E3D0058E517 /* Sources */,
+				95BB3B9A13084E3D0058E517 /* Frameworks */,
+				95BB3B9B13084E3D0058E517 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MCSegmentedControlDemo;
+			productName = MCSegmentedControlDemo;
+			productReference = 95BB3B9D13084E3D0058E517 /* MCSegmentedControlDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		95BB3B9413084E3D0058E517 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Matteo Caldari";
+			};
+			buildConfigurationList = 95BB3B9713084E3D0058E517 /* Build configuration list for PBXProject "MCSegmentedControlDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 95BB3B9213084E3D0058E517;
+			productRefGroup = 95BB3B9E13084E3D0058E517 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				95BB3B9C13084E3D0058E517 /* MCSegmentedControlDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		95BB3B9B13084E3D0058E517 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95BB3BAC13084E3D0058E517 /* InfoPlist.strings in Resources */,
+				95BB3BB513084E3D0058E517 /* MainWindow.xib in Resources */,
+				95BB3BBB13084E3D0058E517 /* MCSegmentedControlDemoViewController.xib in Resources */,
+				954F4D63138EE48A009E0CDB /* star.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		95BB3B9913084E3D0058E517 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95BB3BAF13084E3D0058E517 /* main.m in Sources */,
+				95BB3BB213084E3D0058E517 /* AppController.m in Sources */,
+				95BB3BB813084E3D0058E517 /* MCSegmentedControlDemoViewController.m in Sources */,
+				95BB3BC313084E550058E517 /* MCSegmentedControl.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		95BB3BAA13084E3D0058E517 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95BB3BAB13084E3D0058E517 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		95BB3BB313084E3D0058E517 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95BB3BB413084E3D0058E517 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		95BB3BB913084E3D0058E517 /* MCSegmentedControlDemoViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95BB3BBA13084E3D0058E517 /* en */,
+			);
+			name = MCSegmentedControlDemoViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		95BB3BBC13084E3D0058E517 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		95BB3BBD13084E3D0058E517 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		95BB3BBF13084E3D0058E517 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MCSegmentedControlDemo/MCSegmentedControlDemo-Prefix.pch";
+				INFOPLIST_FILE = "MCSegmentedControlDemo/MCSegmentedControlDemo-Info.plist";
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		95BB3BC013084E3D0058E517 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MCSegmentedControlDemo/MCSegmentedControlDemo-Prefix.pch";
+				INFOPLIST_FILE = "MCSegmentedControlDemo/MCSegmentedControlDemo-Info.plist";
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		95BB3B9713084E3D0058E517 /* Build configuration list for PBXProject "MCSegmentedControlDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95BB3BBC13084E3D0058E517 /* Debug */,
+				95BB3BBD13084E3D0058E517 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		95BB3BBE13084E3D0058E517 /* Build configuration list for PBXNativeTarget "MCSegmentedControlDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95BB3BBF13084E3D0058E517 /* Debug */,
+				95BB3BC013084E3D0058E517 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 95BB3B9413084E3D0058E517 /* Project object */;
+}
