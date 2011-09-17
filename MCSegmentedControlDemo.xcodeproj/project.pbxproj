@@ -146,6 +146,7 @@
 		95BB3B9413084E3D0058E517 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Matteo Caldari";
 			};
 			buildConfigurationList = 95BB3B9713084E3D0058E517 /* Build configuration list for PBXProject "MCSegmentedControlDemo" */;
@@ -260,6 +261,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MCSegmentedControlDemo/MCSegmentedControlDemo-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "MCSegmentedControlDemo/MCSegmentedControlDemo-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -274,6 +276,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MCSegmentedControlDemo/MCSegmentedControlDemo-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "MCSegmentedControlDemo/MCSegmentedControlDemo-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
