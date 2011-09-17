@@ -11,8 +11,11 @@
 
 @implementation MCSegmentedControlDemoViewController
 
+@synthesize testLabel = _testLabel;
+
 - (void)dealloc
 {
+	self.testLabel = nil;
     [super dealloc];
 }
 
@@ -70,6 +73,7 @@
 
 - (void)segmentedControlDidChange:(MCSegmentedControl *)sender 
 {
+	_testLabel.text = [NSString stringWithFormat:@"%@ %d", _testLabel.text, [sender selectedSegmentIndex]];
 	NSLog(@"%d", [sender selectedSegmentIndex]);
 }
 

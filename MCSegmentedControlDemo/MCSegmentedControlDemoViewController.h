@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface MCSegmentedControlDemoViewController : UIViewController {
+	
+	UILabel *_testLabel;
 }
+
+@property (nonatomic, retain) IBOutlet UILabel *testLabel;
 
 @end
