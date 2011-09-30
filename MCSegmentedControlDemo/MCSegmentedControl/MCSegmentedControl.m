@@ -43,9 +43,13 @@
 {
 	self = [super initWithItems:array];
 	if (self) {
-		NSMutableArray *mutableArray = [array mutableCopy];
-		self.items = mutableArray;
-		[mutableArray release];
+		if (array) {
+			NSMutableArray *mutableArray = [array mutableCopy];
+			self.items = mutableArray;
+			[mutableArray release];
+		} else {
+			self.items = [NSMutableArray array];
+		}
 	}
 	
 	return self;
@@ -579,7 +583,7 @@
 	if (![self _mustCustomize]) {
 		[super insertSegmentWithTitle:title atIndex:segment animated:animated];
 	} else {
-		if (segment >= self.numberOfSegments) return;
+		if (segment >= self.numberOfSegments && segment != 0) return;
 		[super insertSegmentWithTitle:title atIndex:segment animated:animated];
 		[self.items insertObject:title atIndex:segment];
 		[self setNeedsDisplay];
