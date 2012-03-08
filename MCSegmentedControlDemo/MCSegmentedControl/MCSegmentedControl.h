@@ -15,7 +15,8 @@
 	UIFont  *_font;
 	UIColor *_selectedItemColor;
 	UIColor *_unselectedItemColor;
-	
+
+	CGFloat _cornerRadius;
 }
 
 /**
@@ -35,5 +36,8 @@
  * Applied to text and images
  */
 @property (nonatomic, retain) UIColor *unselectedItemColor;
+
+
+@property (nonatomic, assign) CGFloat cornerRadius;
 
 @end

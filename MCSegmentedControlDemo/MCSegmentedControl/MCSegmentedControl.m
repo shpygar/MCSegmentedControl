@@ -7,7 +7,7 @@
 
 #import "MCSegmentedControl.h"
 
-#define kCornerRadius  10.0f
+#define kDefaultCornerRadius   10.0f
 
 @interface MCSegmentedControl ()
 @property (nonatomic, retain, readwrite) NSMutableArray *items;
@@ -34,7 +34,8 @@
 			}
 		}
 	}
-	
+
+	self.cornerRadius = kDefaultCornerRadius;
 	self.items = ar;
 	[self setNeedsDisplay];
 }
@@ -50,6 +51,7 @@
 		} else {
 			self.items = [NSMutableArray array];
 		}
+		self.cornerRadius = kDefaultCornerRadius;
 	}
 	
 	return self;
@@ -140,6 +142,19 @@
 	}
 }
 
+- (CGFloat)cornerRadius
+{
+	return _cornerRadius;
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius
+{
+	if (cornerRadius != _cornerRadius) {
+		_cornerRadius = cornerRadius;
+		[self setNeedsDisplay];
+	}
+}
+
 #pragma mark - Overridden UISegmentedControl methods
 
 - (void)layoutSubviews
@@ -183,10 +198,10 @@
 	
 	// Path are drawn starting from the middle of a pixel, in order to avoid an antialiased line
 	CGContextMoveToPoint(c, minx - .5, midy - .5);
-	CGContextAddArcToPoint(c, minx - .5, miny - .5, midx - .5, miny - .5, kCornerRadius);
-	CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, kCornerRadius);
-	CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, kCornerRadius);
-	CGContextAddArcToPoint(c, minx - .5, maxy - .5, minx - .5, midy - .5, kCornerRadius);
+	CGContextAddArcToPoint(c, minx - .5, miny - .5, midx - .5, miny - .5, _cornerRadius);
+	CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, _cornerRadius);
+	CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, _cornerRadius);
+	CGContextAddArcToPoint(c, minx - .5, maxy - .5, minx - .5, midy - .5, _cornerRadius);
 	CGContextClosePath(c);
 	
 	CGContextClip(c);
@@ -194,12 +209,14 @@
 	
 	// Background gradient for non selected items
 	CGFloat components[8] = { 
-		 255/255.0, 255/255.0, 255/255.0, 1.0, 
-		 200/255.0, 200/255.0, 200/255.0, 1.0
+		 225/255.0, 225/255.0, 225/255.0, 1.0, 
+		 120/255.0, 120/255.0, 120/255.0, 1.0
 	};
 	CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, components, NULL, 2);
 	CGContextDrawLinearGradient(c, gradient, CGPointZero, CGPointMake(0, rect.size.height), kCGGradientDrawsBeforeStartLocation);
 	CFRelease(gradient);
+	
+	UIColor *shadowColor = [UIColor colorWithWhite:1.0 alpha:0.7];
 	
 	for (int i = 0; i < self.numberOfSegments; i++) {
 		id item = [self.items objectAtIndex:i];
@@ -285,18 +302,18 @@
 				CGContextMoveToPoint(c, gradient_minx - .5f, gradient_miny - .5f);
 			}
 			
-			CGContextAddArcToPoint(c, gradient_minx - .5f, gradient_miny - .5f, gradient_midx - .5f, gradient_miny - .5f, kCornerRadius);
+			CGContextAddArcToPoint(c, gradient_minx - .5f, gradient_miny - .5f, gradient_midx - .5f, gradient_miny - .5f, _cornerRadius);
 			
 			if (isRightItem) {
-				CGContextAddArcToPoint(c, gradient_maxx - .5f, gradient_miny - .5f, gradient_maxx - .5f, gradient_midy - .5f, kCornerRadius);
-				CGContextAddArcToPoint(c, gradient_maxx - .5f, gradient_maxy - .5f, gradient_midx - .5f, gradient_maxy - .5f, kCornerRadius);
+				CGContextAddArcToPoint(c, gradient_maxx - .5f, gradient_miny - .5f, gradient_maxx - .5f, gradient_midy - .5f, _cornerRadius);
+				CGContextAddArcToPoint(c, gradient_maxx - .5f, gradient_maxy - .5f, gradient_midx - .5f, gradient_maxy - .5f, _cornerRadius);
 			} else {
 				CGContextAddLineToPoint(c, gradient_maxx, gradient_miny);
 				CGContextAddLineToPoint(c, gradient_maxx, gradient_maxy);
 			}
 			
 			if (isLeftItem) {
-				CGContextAddArcToPoint(c, gradient_minx - .5f, gradient_maxy - .5f, gradient_minx - .5f, gradient_midy - .5f, kCornerRadius);
+				CGContextAddArcToPoint(c, gradient_minx - .5f, gradient_maxy - .5f, gradient_minx - .5f, gradient_midy - .5f, _cornerRadius);
 			} else {
 				CGContextAddLineToPoint(c, gradient_minx, gradient_maxy);
 			}
@@ -410,7 +427,7 @@
 				CGContextScaleCTM(c, 1.0, -1.0);  
 				
 				CGContextClipToMask(c, CGRectOffset(imageRect, 0, -1), imageRef);
-				CGContextSetFillColorWithColor(c, [[UIColor whiteColor] CGColor]);
+				CGContextSetFillColorWithColor(c, shadowColor.CGColor);
 				CGContextFillRect(c, CGRectOffset(imageRect, 0, -1));
 				CGContextRestoreGState(c);
 				
@@ -442,7 +459,7 @@
 				[self.selectedItemColor setStroke];	
 				[string drawInRect:stringRect withFont:self.font];
 			} else {
-				[[UIColor whiteColor] setFill];			
+				[shadowColor setFill];			
 				[string drawInRect:CGRectOffset(stringRect, 0.0f, 1.0f) withFont:self.font];
 				[self.unselectedItemColor setFill];
 				[string drawInRect:stringRect withFont:self.font];
@@ -469,10 +486,10 @@
 	
 	if (self.segmentedControlStyle ==  UISegmentedControlStyleBordered) {
 		CGContextMoveToPoint(c, minx - .5, midy - .5);
-		CGContextAddArcToPoint(c, minx - .5, miny - .5, midx - .5, miny - .5, kCornerRadius);
-		CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, kCornerRadius);
-		CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, kCornerRadius);
-		CGContextAddArcToPoint(c, minx - .5, maxy - .5, minx - .5, midy - .5, kCornerRadius);
+		CGContextAddArcToPoint(c, minx - .5, miny - .5, midx - .5, miny - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, minx - .5, maxy - .5, minx - .5, midy - .5, _cornerRadius);
 		CGContextClosePath(c);
 		
 		CGContextSetStrokeColorWithColor(c,[UIColor blackColor].CGColor);
@@ -482,9 +499,9 @@
 		CGContextSaveGState(c);
 		
 		CGRect bottomHalfRect = CGRectMake(0, 
-										   rect.size.height - kCornerRadius + 7,
+										   rect.size.height - _cornerRadius + 7,
 										   rect.size.width,
-										   kCornerRadius);
+										   _cornerRadius);
 		CGContextClearRect(c, CGRectMake(0, 
 										 rect.size.height - 1,
 										 rect.size.width,
@@ -492,10 +509,10 @@
 		CGContextClipToRect(c, bottomHalfRect);
 		
 		CGContextMoveToPoint(c, minx + .5, midy - .5);
-		CGContextAddArcToPoint(c, minx + .5, miny - .5, midx - .5, miny - .5, kCornerRadius);
-		CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, kCornerRadius);
-		CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, kCornerRadius);
-		CGContextAddArcToPoint(c, minx + .5, maxy - .5, minx - .5, midy - .5, kCornerRadius);
+		CGContextAddArcToPoint(c, minx + .5, miny - .5, midx - .5, miny - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, minx + .5, maxy - .5, minx - .5, midy - .5, _cornerRadius);
 		CGContextClosePath(c);
 		
 		CGContextSetBlendMode(c, kCGBlendModeLighten);
@@ -506,10 +523,10 @@
 		CGContextRestoreGState(c);
 		midy--, maxy--;
 		CGContextMoveToPoint(c, minx - .5, midy - .5);
-		CGContextAddArcToPoint(c, minx - .5, miny - .5, midx - .5, miny - .5, kCornerRadius);
-		CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, kCornerRadius);
-		CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, kCornerRadius);
-		CGContextAddArcToPoint(c, minx - .5, maxy - .5, minx - .5, midy - .5, kCornerRadius);
+		CGContextAddArcToPoint(c, minx - .5, miny - .5, midx - .5, miny - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, miny - .5, maxx - .5, midy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, maxx - .5, maxy - .5, midx - .5, maxy - .5, _cornerRadius);
+		CGContextAddArcToPoint(c, minx - .5, maxy - .5, minx - .5, midy - .5, _cornerRadius);
 		CGContextClosePath(c);
 		
 		CGContextSetBlendMode(c, kCGBlendModeMultiply);
