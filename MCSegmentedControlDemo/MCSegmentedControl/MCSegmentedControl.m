@@ -299,7 +299,8 @@
 		id item = [self.items objectAtIndex:i];
 		BOOL isLeftItem  = i == 0;
 		BOOL isRightItem = i == self.numberOfSegments -1;
-		
+		BOOL isSegmentEnabled = [self isEnabledForSegmentAtIndex:i];
+
 		CGRect itemBgRect = CGRectMake(i * itemSize.width, 
 									   0.0f,
 									   itemSize.width,
@@ -502,22 +503,22 @@
 				CGContextScaleCTM(c, 1.0, -1.0);  
 				
 				CGContextClipToMask(c, imageRect, imageRef);
-				CGContextSetFillColorWithColor(c, [self.selectedItemColor CGColor]);
-				
+				CGContextSetFillColorWithColor(c, self.selectedItemColor.CGColor);
 				CGContextFillRect(c, imageRect);
 				CGContextRestoreGState(c);
 			} 
 			else {
-				
-				// 1px shadow
-				CGContextSaveGState(c);
-				CGContextTranslateCTM(c, 0, itemBgRect.size.height);  
-				CGContextScaleCTM(c, 1.0, -1.0);  
-				
-				CGContextClipToMask(c, CGRectOffset(imageRect, 0, -1), imageRef);
-				CGContextSetFillColorWithColor(c, self.unselectedItemShadowColor.CGColor);
-				CGContextFillRect(c, CGRectOffset(imageRect, 0, -1));
-				CGContextRestoreGState(c);
+				if (isSegmentEnabled) {
+					// 1px shadow
+					CGContextSaveGState(c);
+					CGContextTranslateCTM(c, 0, itemBgRect.size.height);  
+					CGContextScaleCTM(c, 1.0, -1.0);  
+					
+					CGContextClipToMask(c, CGRectOffset(imageRect, 0, -1), imageRef);
+					CGContextSetFillColorWithColor(c, self.unselectedItemShadowColor.CGColor);
+					CGContextFillRect(c, CGRectOffset(imageRect, 0, -1));
+					CGContextRestoreGState(c);
+				}
 				
 				// Image drawn as a mask
 				CGContextSaveGState(c);
@@ -526,13 +527,15 @@
 				
 				CGContextClipToMask(c, imageRect, imageRef);
 				CGContextSetFillColorWithColor(c, [self.unselectedItemColor CGColor]);
+				CGContextSetAlpha(c, isSegmentEnabled ? 1.0 : 0.5);
 				CGContextFillRect(c, imageRect);
 				CGContextRestoreGState(c);
 			}
 			
 		}
 		else if ([item isKindOfClass:[NSString class]]) {
-			
+			CGContextSaveGState(c);
+
 			NSString *string = (NSString *)[_items objectAtIndex:i];
 			CGSize stringSize = [string sizeWithFont:self.font];
 			CGRect stringRect = CGRectMake(i * itemSize.width + (itemSize.width - stringSize.width) / 2, 
@@ -547,11 +550,16 @@
 				[self.selectedItemColor setStroke];	
 				[string drawInRect:stringRect withFont:self.font];
 			} else {
-				[self.unselectedItemShadowColor setFill];			
-				[string drawInRect:CGRectOffset(stringRect, 0.0f, 1.0f) withFont:self.font];
+				if (isSegmentEnabled) {
+					[self.unselectedItemShadowColor setFill];			
+					[string drawInRect:CGRectOffset(stringRect, 0.0f, 1.0f) withFont:self.font];
+				}
+				
 				[self.unselectedItemColor setFill];
+				CGContextSetAlpha(c, isSegmentEnabled ? 1.0 : 0.5);
 				[string drawInRect:stringRect withFont:self.font];
 			}
+			CGContextRestoreGState(c);
 		}
 		
 		// Separator
@@ -634,9 +642,11 @@
 	} else {
 		CGPoint point = [[touches anyObject] locationInView:self];
 		int itemIndex = floor(self.numberOfSegments * point.x / self.bounds.size.width);
-		self.selectedSegmentIndex = itemIndex;
-		
-		[self setNeedsDisplay];
+		if ([self isEnabledForSegmentAtIndex:itemIndex]) {
+			self.selectedSegmentIndex = itemIndex;
+			
+			[self setNeedsDisplay];
+		}
 	}
 }
 
