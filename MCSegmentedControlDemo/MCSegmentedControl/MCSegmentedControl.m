@@ -9,7 +9,10 @@
 
 #define kDefaultCornerRadius   10.0f
 
-@interface MCSegmentedControl ()
+@interface MCSegmentedControl () {
+	@private
+	NSArray *_unSelectedItemBackgroundGradientCGColors;
+}
 @property (nonatomic, retain, readwrite) NSMutableArray *items;
 - (BOOL)_mustCustomize;
 @end
@@ -18,6 +21,16 @@
 @implementation MCSegmentedControl
 
 #pragma mark - Object life cycle
+
+- (void)_initialize
+{
+	self.cornerRadius = kDefaultCornerRadius;
+	
+	self.unSelectedItemBackgroundGradientColors = [NSArray arrayWithObjects:
+												   [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0],
+												   [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1.0],
+												   nil];
+}
 
 - (void)awakeFromNib
 {
@@ -35,8 +48,10 @@
 		}
 	}
 
-	self.cornerRadius = kDefaultCornerRadius;
 	self.items = ar;
+	
+	[self _initialize];
+	
 	[self setNeedsDisplay];
 }
 
@@ -51,7 +66,8 @@
 		} else {
 			self.items = [NSMutableArray array];
 		}
-		self.cornerRadius = kDefaultCornerRadius;
+		
+		[self _initialize];
 	}
 	
 	return self;
@@ -155,6 +171,36 @@
 	}
 }
 
+- (NSArray *)unSelectedItemBackgroundGradientColors
+{
+	return _unSelectedItemBackgroundGradientCGColors;
+}
+
+- (void)setUnSelectedItemBackgroundGradientColors:(NSArray *)array
+{
+	if (array && [array count] != 2) {
+		NSLog(@"MCSegmentedControl WARNING: unSelectedItemBackgroundGradientColors must contain 2 colors");
+	} 
+	else if (array != _unSelectedItemBackgroundGradientColors) {
+		[_unSelectedItemBackgroundGradientColors release];
+		_unSelectedItemBackgroundGradientColors = [array retain];
+
+		if (_unSelectedItemBackgroundGradientColors) {
+			[_unSelectedItemBackgroundGradientCGColors release];
+			_unSelectedItemBackgroundGradientCGColors = [[NSArray alloc] initWithObjects:
+														 (id)((UIColor *)[_unSelectedItemBackgroundGradientColors objectAtIndex:0]).CGColor, 
+														 (id)((UIColor *)[_unSelectedItemBackgroundGradientColors objectAtIndex:1]).CGColor, 
+														 nil];
+
+			[self setNeedsDisplay];
+		}
+		else {
+			[_unSelectedItemBackgroundGradientCGColors release], _unSelectedItemBackgroundGradientCGColors = nil;
+		}
+	}
+}
+
+
 #pragma mark - Overridden UISegmentedControl methods
 
 - (void)layoutSubviews
@@ -208,13 +254,12 @@
 	
 	
 	// Background gradient for non selected items
-	CGFloat components[8] = { 
-		 255/255.0, 255/255.0, 255/255.0, 1.0, 
-		 200/255.0, 200/255.0, 200/255.0, 1.0
-	};
-	CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, components, NULL, 2);
-	CGContextDrawLinearGradient(c, gradient, CGPointZero, CGPointMake(0, rect.size.height), kCGGradientDrawsBeforeStartLocation);
-	CFRelease(gradient);
+	
+	if (_unSelectedItemBackgroundGradientCGColors) {
+		CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)_unSelectedItemBackgroundGradientCGColors, NULL);
+		CGContextDrawLinearGradient(c, gradient, CGPointZero, CGPointMake(0, rect.size.height), kCGGradientDrawsBeforeStartLocation);
+		CFRelease(gradient);
+	}
 	
 	UIColor *shadowColor = [UIColor whiteColor];
 	

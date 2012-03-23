@@ -17,6 +17,8 @@
 	UIColor *_unselectedItemColor;
 
 	CGFloat _cornerRadius;
+	
+	NSArray *_unSelectedItemBackgroundGradientColors;
 }
 
 /**
@@ -39,5 +41,11 @@
 
 
 @property (nonatomic, assign) CGFloat cornerRadius;
+
+/**
+ * Contains the 2 gradient components for the non-selected items
+ * Default is white and gray 200/255.0
+ */
+@property (nonatomic, retain) NSArray *unSelectedItemBackgroundGradientColors;
 
 @end
