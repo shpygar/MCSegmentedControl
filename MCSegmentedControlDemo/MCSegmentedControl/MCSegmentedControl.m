@@ -209,14 +209,14 @@
 	
 	// Background gradient for non selected items
 	CGFloat components[8] = { 
-		 225/255.0, 225/255.0, 225/255.0, 1.0, 
-		 120/255.0, 120/255.0, 120/255.0, 1.0
+		 255/255.0, 255/255.0, 255/255.0, 1.0, 
+		 200/255.0, 200/255.0, 200/255.0, 1.0
 	};
 	CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, components, NULL, 2);
 	CGContextDrawLinearGradient(c, gradient, CGPointZero, CGPointMake(0, rect.size.height), kCGGradientDrawsBeforeStartLocation);
 	CFRelease(gradient);
 	
-	UIColor *shadowColor = [UIColor colorWithWhite:1.0 alpha:0.7];
+	UIColor *shadowColor = [UIColor whiteColor];
 	
 	for (int i = 0; i < self.numberOfSegments; i++) {
 		id item = [self.items objectAtIndex:i];
