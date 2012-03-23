@@ -26,6 +26,10 @@
 {
 	self.cornerRadius = kDefaultCornerRadius;
 	
+	self.selectedItemShadowColor = [UIColor colorWithWhite:0.0f alpha:.2f];
+	self.unselectedItemShadowColor = [UIColor whiteColor];
+	
+	
 	self.unSelectedItemBackgroundGradientColors = [NSArray arrayWithObjects:
 												   [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0],
 												   [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1.0],
@@ -200,6 +204,36 @@
 	}
 }
 
+- (UIColor *)selectedItemShadowColor
+{
+	return _selectedItemShadowColor;
+}
+
+- (void)setSelectedItemShadowColor:(UIColor *)selectedItemShadowColor
+{
+	if (selectedItemShadowColor != _selectedItemShadowColor) {
+		[_selectedItemShadowColor release];
+		_selectedItemShadowColor = [selectedItemShadowColor retain];
+		
+		[self setNeedsDisplay];
+	}
+}
+
+- (UIColor *)unselectedItemShadowColor
+{
+	return _unselectedItemShadowColor;
+}
+
+- (void)setUnselectedItemShadowColor:(UIColor *)unselectedItemShadowColor
+{
+	if (unselectedItemShadowColor != _unselectedItemShadowColor) {
+		[_unselectedItemShadowColor release];
+		_unselectedItemShadowColor = [unselectedItemShadowColor retain];
+		
+		[self setNeedsDisplay];
+	}
+}
+
 
 #pragma mark - Overridden UISegmentedControl methods
 
@@ -260,8 +294,6 @@
 		CGContextDrawLinearGradient(c, gradient, CGPointZero, CGPointMake(0, rect.size.height), kCGGradientDrawsBeforeStartLocation);
 		CFRelease(gradient);
 	}
-	
-	UIColor *shadowColor = [UIColor whiteColor];
 	
 	for (int i = 0; i < self.numberOfSegments; i++) {
 		id item = [self.items objectAtIndex:i];
@@ -454,6 +486,17 @@
 			
 			if (i == self.selectedSegmentIndex) {
 				
+				// 1px shadow
+				CGContextSaveGState(c);
+				CGContextTranslateCTM(c, 0, itemBgRect.size.height);  
+				CGContextScaleCTM(c, 1.0, -1.0);  
+				
+				CGContextClipToMask(c, CGRectOffset(imageRect, 0, 1), imageRef);
+				CGContextSetFillColorWithColor(c, self.selectedItemShadowColor.CGColor);
+				CGContextFillRect(c, CGRectOffset(imageRect, 0, -1));
+				CGContextRestoreGState(c);
+				
+				// Image drawn as a mask
 				CGContextSaveGState(c);
 				CGContextTranslateCTM(c, 0, rect.size.height);
 				CGContextScaleCTM(c, 1.0, -1.0);  
@@ -472,7 +515,7 @@
 				CGContextScaleCTM(c, 1.0, -1.0);  
 				
 				CGContextClipToMask(c, CGRectOffset(imageRect, 0, -1), imageRef);
-				CGContextSetFillColorWithColor(c, shadowColor.CGColor);
+				CGContextSetFillColorWithColor(c, self.unselectedItemShadowColor.CGColor);
 				CGContextFillRect(c, CGRectOffset(imageRect, 0, -1));
 				CGContextRestoreGState(c);
 				
@@ -498,13 +541,13 @@
 										   stringSize.height);
 			
 			if (self.selectedSegmentIndex == i) {
-				[[UIColor colorWithWhite:0.0f alpha:.2f] setFill];
+				[self.selectedItemShadowColor setFill];
 				[string drawInRect:CGRectOffset(stringRect, 0.0f, -1.0f) withFont:self.font];
 				[self.selectedItemColor setFill];	
 				[self.selectedItemColor setStroke];	
 				[string drawInRect:stringRect withFont:self.font];
 			} else {
-				[shadowColor setFill];			
+				[self.unselectedItemShadowColor setFill];			
 				[string drawInRect:CGRectOffset(stringRect, 0.0f, 1.0f) withFont:self.font];
 				[self.unselectedItemColor setFill];
 				[string drawInRect:stringRect withFont:self.font];

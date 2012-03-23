@@ -16,6 +16,9 @@
 	UIColor *_selectedItemColor;
 	UIColor *_unselectedItemColor;
 
+	UIColor *_selectedItemShadowColor;
+	UIColor *_unselectedItemShadowColor;
+	
 	CGFloat _cornerRadius;
 	
 	NSArray *_unSelectedItemBackgroundGradientColors;
@@ -39,6 +42,17 @@
  */
 @property (nonatomic, retain) UIColor *unselectedItemColor;
 
+/**
+ * Default is black with .2 alpha
+ */
+@property (nonatomic, retain) UIColor *selectedItemShadowColor;
+
+
+/**
+ * Default is white
+ */
+@property (nonatomic, retain) UIColor *unselectedItemShadowColor;
+
 
 @property (nonatomic, assign) CGFloat cornerRadius;
 
@@ -47,5 +61,9 @@
  * Default is white and gray 200/255.0
  */
 @property (nonatomic, retain) NSArray *unSelectedItemBackgroundGradientColors;
+
+
+
+
 
 @end
