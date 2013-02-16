@@ -318,7 +318,8 @@
 			float factor  = 1.22f; // multiplier applied to the first color of the gradient to obtain the second
 			float mfactor = 1.25f; // multiplier applied to the color of the first gradient to obtain the bottom gradient
 			
-			int red = 55, green = 111, blue = 214; // default blue color
+			int red = 55, green = 111, blue = 214;
+            CGFloat alpha = 1.0f; // default blue color
 			
 			if (self.tintColor != nil) {
 				const CGFloat *components = CGColorGetComponents(self.tintColor.CGColor);
@@ -330,6 +331,7 @@
 					red   = components[0] * 255;
 					green = components[1] * 255;
 					blue  = components[2] * 255;
+                    alpha = components[3];
 				}
 			}
 			
@@ -337,8 +339,8 @@
 			// Top gradient
 			
 			CGFloat top_components[16] = { 
-				red / 255.0f,         green / 255.0f,         blue/255.0f          , 1.0f,
-				(red*mfactor)/255.0f, (green*mfactor)/255.0f, (blue*mfactor)/255.0f, 1.0f
+				red / 255.0f,         green / 255.0f,         blue/255.0f          , alpha,
+				(red*mfactor)/255.0f, (green*mfactor)/255.0f, (blue*mfactor)/255.0f, alpha
 			};
 			
 			CGFloat top_locations[2] = {
@@ -401,8 +403,8 @@
 			
 			CGContextClip(c);
 			CGFloat bottom_components[16] = {
-				(red*factor)        /255.0f, (green*factor)        /255.0f, (blue*factor)/255.0f,         1.0f,
-				(red*factor*mfactor)/255.0f, (green*factor*mfactor)/255.0f, (blue*factor*mfactor)/255.0f, 1.0f
+				(red*factor)        /255.0f, (green*factor)        /255.0f, (blue*factor)/255.0f,         alpha,
+				(red*factor*mfactor)/255.0f, (green*factor*mfactor)/255.0f, (blue*factor*mfactor)/255.0f, alpha
 			};
 			
 			CGFloat bottom_locations[2] = {
